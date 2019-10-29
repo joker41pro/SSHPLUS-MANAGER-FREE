@@ -1232,10 +1232,10 @@ fun_socks () {
 	clear
     echo -e "\E[44;1;37m            GERENCIAR PROXY SOCKS             \E[0m"
     echo ""
-    [[ $(netstat -nplt |grep 'python' | wc -l) != '0' ]] && {
+    [[ $(netstat -nplt |grep 'python3' | wc -l) != '0' ]] && {
         sks='\033[1;32mON'
         var_sks1="DESATIVAR SOCKS"
-        echo -e "\033[1;33mPORTAS\033[1;37m: \033[1;32m$(netstat -nplt |grep 'python' | awk {'print $4'} |cut -d: -f2 |xargs)"
+        echo -e "\033[1;33mPORTAS\033[1;37m: \033[1;32m$(netstat -nplt |grep 'python3' | awk {'print $4'} |cut -d: -f2 |xargs)"
     } || {
         var_sks1="ATIVAR SOCKS"
         sks='\033[1;31mOFF'
@@ -1284,12 +1284,12 @@ fun_socks () {
 		    verif_ptrs $porta
 		    fun_inisocks () {
 		    	sleep 1
-		    	screen -dmS proxy python /etc/SSHPlus/proxy.py $porta
+		    	screen -dmS proxy python3 /etc/SSHPlus/proxy.py $porta
 		    	[[ $(grep -wc "proxy.py" /etc/autostart) = '0' ]] && {
-		    		echo -e "screen -dmS proxy python /etc/SSHPlus/proxy.py $porta" >> /etc/autostart
+		    		echo -e "screen -dmS proxy python3 /etc/SSHPlus/proxy.py $porta" >> /etc/autostart
 		    	} || {
 		            sed -i '/proxy.py/d' /etc/autostart
-		            echo -e "screen -dmS proxy python /etc/SSHPlus/proxy.py $porta" >> /etc/autostart
+		            echo -e "screen -dmS proxy python3 /etc/SSHPlus/proxy.py $porta" >> /etc/autostart
 		        }
 		    }
 		    echo ""
@@ -1322,7 +1322,7 @@ fun_socks () {
 			echo ""
 			abrirptsks () {
 				sleep 1
-				screen -dmS proxy python /etc/SSHPlus/proxy.py $porta
+				screen -dmS proxy python3 /etc/SSHPlus/proxy.py $porta
 				sleep 1
 			}
 			fun_bar 'abrirptsks'
@@ -1362,14 +1362,14 @@ fun_socks () {
 			fun_bar 'fun_msgsocks'
 			restartsocks () {
 				if ps x | grep proxy.py|grep -v grep 1>/dev/null 2>/dev/null; then
-				    echo -e "$(netstat -nplt |grep 'python' | awk {'print $4'} |cut -d: -f2 |xargs)" > /tmp/Pt_sks
+				    echo -e "$(netstat -nplt |grep 'python3' | awk {'print $4'} |cut -d: -f2 |xargs)" > /tmp/Pt_sks
 					for pidproxy in  `screen -ls | grep ".proxy" | awk {'print $1'}`; do
 						screen -r -S "$pidproxy" -X quit
 					done
 					screen -wipe > /dev/null
 					_Ptsks="$(cat /tmp/Pt_sks)"
 					sleep 1
-					screen -dmS proxy python /etc/SSHPlus/proxy.py $_Ptsks
+					screen -dmS proxy python3 /etc/SSHPlus/proxy.py $_Ptsks
 					rm /tmp/Pt_sks
 				fi
 			}
@@ -1540,8 +1540,8 @@ echo -e "\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 
 	sts5="\033[1;31mOFF "
 }
 
-[[ "$(netstat -nplt |grep 'python' |wc -l)" != '0' ]] && {
-	echo -e "\033[1;32mSERVICO: \033[1;33mPROXY SOCKS \033[1;32mPORTA: \033[1;37m$(netstat -nplt |grep 'python' | awk {'print $4'} |cut -d: -f2 |xargs)"
+[[ "$(netstat -nplt |grep 'python3' |wc -l)" != '0' ]] && {
+	echo -e "\033[1;32mSERVICO: \033[1;33mPROXY SOCKS \033[1;32mPORTA: \033[1;37m$(netstat -nplt |grep 'python3' | awk {'print $4'} |cut -d: -f2 |xargs)"
 	sts4="\033[1;32mON "
 } || {
 	sts4="\033[1;31mOFF "

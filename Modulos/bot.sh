@@ -458,7 +458,7 @@ echo -e "SSH: $(grep 'Port' /etc/ssh/sshd_config|cut -d' ' -f2 |grep -v 'no' |xa
 [[ "$(netstat -nplt |grep 'sslh' | wc -l)" != '0' ]] && echo -e "SSlh: $(netstat -nplt |grep 'sslh' |awk {'print $4'} |cut -d: -f2 |xargs)" >> $PTs
 [[ "$(netstat -nplt |grep 'squid'| wc -l)" != '0' ]] && echo -e "Squid: $(netstat -nplt |grep 'squid' | awk -F ":" {'print $4'} | xargs)" >> $PTs
 [[ "$(netstat -nltp|grep 'dropbear' |wc -l)" != '0' ]] && echo -e "DropBear: $(netstat -nplt |grep 'dropbear' | awk -F ":" {'print $4'} | xargs)" >> $PTs
-[[ "$(netstat -nplt |grep 'python' |wc -l)" != '0' ]] && echo -e "Proxy Socks: $(netstat -nplt |grep 'python' | awk {'print $4'} |cut -d: -f2 |xargs)" >> $PTs
+[[ "$(netstat -nplt |grep 'python3' |wc -l)" != '0' ]] && echo -e "Proxy Socks: $(netstat -nplt |grep 'python3' | awk {'print $4'} |cut -d: -f2 |xargs)" >> $PTs
 
 local info
       info="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"

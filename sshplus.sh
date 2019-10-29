@@ -132,8 +132,8 @@ apt-get install jq -y > /dev/null 2>&1
 apt-get install curl -y > /dev/null 2>&1
 apt-get install figlet -y > /dev/null 2>&1
 apt-get install python3 -y > /dev/null 2>&1
-apt-get install python-pip -y > /dev/null 2>&1
-pip install speedtest-cli > /dev/null 2>&1
+apt-get install python3-pip -y > /dev/null 2>&1
+pip3 install speedtest-cli > /dev/null 2>&1
 }
 fun_bar 'inst_pct'
 sleep 1

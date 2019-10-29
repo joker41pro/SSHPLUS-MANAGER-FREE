@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 # SSHPLUS By @Crazy_vpn
-import socket, threading, thread, select, signal, sys, time
+import socket, threading, _thread, select, signal, sys, time
 from os import system
 system("clear")
 #conexao
@@ -24,8 +24,8 @@ class Server(threading.Thread):
         self.host = host
         self.port = port
         self.threads = []
-	self.threadsLock = threading.Lock()
-	self.logLock = threading.Lock()
+        self.threadsLock = threading.Lock()
+        self.logLock = threading.Lock()
 
     def run(self):
         self.soc = socket.socket(socket.AF_INET)
@@ -52,9 +52,9 @@ class Server(threading.Thread):
             
     def printLog(self, log):
         self.logLock.acquire()
-        print log
+        print(log)
         self.logLock.release()
-	
+
     def addConn(self, conn):
         try:
             self.threadsLock.acquire()
@@ -80,7 +80,7 @@ class Server(threading.Thread):
                 c.close()
         finally:
             self.threadsLock.release()
-			
+
 
 class ConnectionHandler(threading.Thread):
     def __init__(self, socClient, server, addr):
@@ -127,7 +127,7 @@ class ConnectionHandler(threading.Thread):
             
             if hostPort != '':
                 passwd = self.findHeader(self.client_buffer, 'X-Pass')
-				
+
                 if len(PASS) != 0 and passwd == PASS:
                     self.method_CONNECT(hostPort)
                 elif len(PASS) != 0 and passwd != PASS:
@@ -137,13 +137,13 @@ class ConnectionHandler(threading.Thread):
                 else:
                    self.client.send('HTTP/1.1 403 Forbidden!\r\n\r\n')
             else:
-                print '- No X-Real-Host!'
+                print('- No X-Real-Host!')
                 self.client.send('HTTP/1.1 400 NoXRealHost!\r\n\r\n')
 
         except Exception as e:
             self.log += ' - error: ' + e.strerror
             self.server.printLog(self.log)
-	    pass
+            pass
         finally:
             self.close()
             self.server.removeConn(self)
@@ -181,7 +181,7 @@ class ConnectionHandler(threading.Thread):
         self.target.connect(address)
 
     def method_CONNECT(self, path):
-    	self.log += ' - CONNECT ' + path
+        self.log += ' - CONNECT ' + path
         self.connect_target(path)
         self.client.sendall(RESPONSE)
         self.client_buffer = ''
@@ -199,20 +199,20 @@ class ConnectionHandler(threading.Thread):
                 error = True
             if recv:
                 for in_ in recv:
-		    try:
+                    try:
                         data = in_.recv(BUFLEN)
                         if data:
-			    if in_ is self.target:
-				self.client.send(data)
+                            if in_ is self.target:
+                                self.client.send(data)
                             else:
                                 while data:
                                     byte = self.target.send(data)
                                     data = data[byte:]
 
                             count = 0
-			else:
-			    break
-		    except:
+                        else:
+                            break
+                    except:
                         error = True
                         break
             if count == TIMEOUT:
@@ -224,17 +224,17 @@ class ConnectionHandler(threading.Thread):
 
 
 def main(host=IP, port=PORT):
-    print "\033[0;34m━"*8,"\033[1;32m PROXY SOCKS","\033[0;34m━"*8,"\n"
-    print "\033[1;33mIP:\033[1;32m " + IP
-    print "\033[1;33mPORTA:\033[1;32m " + str(PORT) + "\n"
-    print "\033[0;34m━"*10,"\033[1;32m SSHPLUS","\033[0;34m━\033[1;37m"*11,"\n"
+    print("\033[0;34m━"*8,"\033[1;32m PROXY SOCKS","\033[0;34m━"*8,"\n")
+    print("\033[1;33mIP:\033[1;32m " + IP)
+    print("\033[1;33mPORTA:\033[1;32m " + str(PORT) + "\n")
+    print("\033[0;34m━"*10,"\033[1;32m SSHPLUS","\033[0;34m━\033[1;37m"*11,"\n")
     server = Server(IP, PORT)
     server.start()
     while True:
         try:
             time.sleep(2)
         except KeyboardInterrupt:
-            print '\nParando...'
+            print('\nParando...')
             server.close()
             break
 if __name__ == '__main__':
