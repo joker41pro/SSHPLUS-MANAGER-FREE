@@ -183,7 +183,7 @@ class ConnectionHandler(threading.Thread):
     def method_CONNECT(self, path):
         self.log += ' - CONNECT ' + path
         self.connect_target(path)
-        self.client.sendall(RESPONSE)
+        self.client.sendall(RESPONSE.encode())
         self.client_buffer = ''
         self.server.printLog(self.log)
         self.doCONNECT()
