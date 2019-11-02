@@ -1,13 +1,14 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/list > /dev/null 2>&1
+wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/list -O list > /dev/null 2>&1
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/versao -O /bin/versao > /dev/null 2>&1
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/licence -O /usr/lib/licence > /dev/null 2>&1
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/sshplus -O /home/sshplus > /dev/null 2>&1
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/versao -O /home/versao > /dev/null 2>&1
 
 clear
-[[ "$EUID" -ne 0 ]] && echo -e "\033[1;33mDesculpe, \033[1;33mvocê precisa executar como root\033[0m" && rm -rf $HOME/Plus > /dev/null 2>&1 && return 1
+RUNDIR=$PWD
+[[ "$EUID" -ne 0 ]] && echo -e "\033[1;33mDesculpe, \033[1;33mvocê precisa executar como root\033[0m" && rm -rf $HOME/Plus > /dev/null 2>&1 && exit 1
 cd $HOME
 fun_bar () {
 comando[0]="$1"
@@ -41,7 +42,7 @@ echo -e "\033[1;31m════════════════════�
 echo ""
 echo -e "             \033[1;31mATENCAO! \033[1;33mESSE SCRIPT IRA !\033[0m"
 echo ""
-echo -e "\033[1;31m• \033[1;33mINSTALAR UM CONJUNTO DE SCRIPTS COMO FERRAMENTAS\033[0m" 
+echo -e "\033[1;31m• \033[1;33mINSTALAR UM CONJUNTO DE SCRIPTS COMO FERRAMENTAS\033[0m"
 echo -e "\033[1;33m  PARA O GERENCIAMENTO DE REDE, SISTEMA E USUARIOS\033[0m"
 echo ""
 echo -e "\033[1;32m• \033[1;32mDICA! \033[1;33mULTILIZE O TEMA DARK EM SEU TERMINAL PARA\033[0m"
@@ -49,30 +50,16 @@ echo -e "\033[1;33m  UMA MELHOR EXPERIÊNCIA E VISUALIZACAO DO MESMO!\033[0m"
 echo ""
 echo -e "\033[1;31m≠×≠×≠×≠×≠×≠×≠×≠×[\033[1;33m • \033[1;32mSSHPLUS MANAGER\033[1;33m •\033[1;31m ]≠×≠×≠×≠×≠×≠×≠×≠×\033[0m"
 echo ""
-echo -ne "\033[1;36mGenerar As Key Free[N/S]: \033[1;37m"; read x
-[[ $x = @(n|N) ]] && exit
+echo -ne "\033[1;36mContinuar a instalação? [S/n]: \033[1;37m"; read x
+[[ $x = @(n|N) ]] && rm -f $RUNDIR/list /bin/versao /usr/lib/licence /home/sshplus /home/versao && exit
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
-echo -ne "\033[1;36mAGUARDE... \033[1;32m OK !\033[1;37m "
-chmod +x list ./list > /dev/null 2>&1
-echo ""
-echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
-echo -e "\033[1;36mVerificando a key\033[1;35m ...\033[0m"
-sleep 2
-echo ""
-echo -ne "\033[1;36mInforme seu Nome:\033[1;37m "; read name
-if [ -z "$name" ]; then
-  echo ""
-  echo -e "\033[1;31mErro \033[1;32mNome vazio!\033[0m"
-  rm -rf $HOME/Plus $_lsk/list > /dev/null 2>&1
-  sleep 2
-  clear; exit 1
-fi
+chmod +x list > /dev/null 2>&1
 IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 if [[ "$IP" = "" ]]; then
   IP=$(wget -qO- ipv4.icanhazip.com)
 fi
 echo ""
-echo -ne "\033[1;36mPara continuar confirme seu IP \033[1;37m"; read -e -i $IP ipdovps
+echo -ne "\033[1;36mPara continuar confirme seu IP: \033[1;37m"; read -e -i $IP ipdovps
 if [ -z "$ipdovps" ]; then
   echo ""
   echo -e "\033[1;31mErro \033[1;32mIP incorreto!\033[0m"
