@@ -14,11 +14,10 @@ echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "\033[1;31m#"
-   sleep 0.1s
+   sleep 0.05s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
    echo -e "\033[1;33m]"
-   sleep 1s
    tput cuu1
    tput dl1
    echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
@@ -27,16 +26,15 @@ echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
 tput cnorm
 }
 echo ""
-vrs1=$(cat /bin/versao)
-vrs2=$(wget -qO- https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/versao | sed -n '1 p')
-[[ ! -e /bin/versao ]] && rm -rf /bin/menu
 echo -e "                              \033[1;31mBy Crazy\033[1;36m"
 echo -e "   SSHPlus" | figlet
 echo ""
 echo -e "\033[1;32mVERIFICANDO SE HA ATUALIZACOES DISPONIVEIS\033[0m"
 echo ""
-fun_bar 'sleep 4'
-sleep 2
+
+vrs1=$(cat /bin/versao)
+vrs2=$(wget -qO- https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/versao | sed -n '1 p')
+[[ ! -e /bin/versao ]] && rm -rf /bin/menu
 echo ""
 if [ "$vrs1" = "$vrs2" ]; then
     echo ""
@@ -51,7 +49,6 @@ else
     if [[ "$res" = s || "$res" = S ]];then
     echo ""
     echo -e "\033[1;32mAtualizando script..."
-    sleep 3
     wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/sshplus.sh 2>/dev/null
     chmod +x sshplus.sh
     ./sshplus.sh

@@ -20,11 +20,10 @@ echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "\033[1;31m#"
-   sleep 0.1s
+   sleep 0.05s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
    echo -e "\033[1;33m]"
-   sleep 1s
    tput cuu1
    tput dl1
    echo -ne "\033[1;33mAGUARDE \033[1;37m- \033[1;33m["
@@ -1608,14 +1607,12 @@ case $x in
 	menu
 	;;
 	0|00)
-	echo -e "\033[1;31mSaindo...\033[0m"
-	sleep 2
 	clear
 	exit;
 	;;
 	*)
 	echo -e "\033[1;31mOpcao invalida !\033[0m"
-	sleep 2
+	sleep 1
 esac
 done
 }

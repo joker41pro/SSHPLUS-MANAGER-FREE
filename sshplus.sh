@@ -24,7 +24,7 @@ echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "\033[1;31m#"
-   sleep 0.1s
+   sleep 0.05s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
    echo -e "\033[1;33m]"
@@ -135,7 +135,6 @@ echo ""
 cd $_lsk
 fun_bar 'source list'
 rm sshplus* > /dev/null 2>&1
-sleep 2
 clear
 apt-get install lsof > /dev/null 2>&1
 echo ""
