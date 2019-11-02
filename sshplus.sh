@@ -28,7 +28,6 @@ while true; do
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
    echo -e "\033[1;33m]"
-   sleep 1s
    tput cuu1
    tput dl1
    echo -ne "  \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
