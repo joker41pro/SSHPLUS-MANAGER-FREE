@@ -1347,13 +1347,12 @@ fun_socks () {
 			if [[ -z "$msgg" ]]; then
 				echo ""
 				echo -e "\033[1;31mStatus invalido!"
-				sleep 3
+				sleep 2
 				fun_conexao
 			fi
 			fun_msgsocks () {
 				msgsocks2=$(cat /etc/SSHPlus/proxy.py |grep "MSG =" | awk -F = '{print $2}')
 				sed -i "s/$msgsocks2/ '$msgg'/g" /etc/SSHPlus/proxy.py
-				sleep 1
 			}
 			echo ""
 			echo -e "\033[1;32mALTERANDO STATUS!"
@@ -1367,7 +1366,6 @@ fun_socks () {
 					done
 					screen -wipe > /dev/null
 					_Ptsks="$(cat /tmp/Pt_sks)"
-					sleep 1
 					screen -dmS proxy python3 /etc/SSHPlus/proxy.py $_Ptsks
 					rm /tmp/Pt_sks
 				fi
@@ -1378,7 +1376,7 @@ fun_socks () {
 			fun_bar 'restartsocks'
 			echo ""
 			echo -e "\033[1;32mSTATUS ALTERADO COM SUCESSO!"
-			sleep 3
+			sleep 2
 			fun_socks
 		else
 			clear
