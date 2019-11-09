@@ -25,6 +25,7 @@ done
 echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
 tput cnorm
 }
+export LC_ALL=C
 IP=$(cat /etc/IP)
 x="ok"
 menu ()
@@ -353,7 +354,7 @@ case "$x" in
    ;;
    9 | 09)
    clear
-   LC_ALL=C infousers
+   infousers
    echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
    ;;
    10)
