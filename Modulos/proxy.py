@@ -2,8 +2,7 @@
 # encoding: utf-8
 # SSHPLUS By @Crazy_vpn
 import socket, threading, _thread, select, signal, sys, time
-from os import system
-system("clear")
+print('\033c')
 #conexao
 IP = '0.0.0.0'
 try:
