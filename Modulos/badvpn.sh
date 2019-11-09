@@ -90,7 +90,7 @@ statusudp="\033[1;31mDESATIVADO"
 fi
 clear
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[41;1;37m               ❖ SSHPLUS MANAGER ❖                \E[0m"
+echo -e "\E[41;1;37m             ❖ SSHPLUS MANAGER MOD ❖              \E[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 if [ "$system" ]
 then
