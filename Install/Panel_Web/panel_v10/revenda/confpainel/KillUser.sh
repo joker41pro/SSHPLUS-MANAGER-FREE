@@ -1,4 +1,4 @@
-
+#!/bin/bash
 USR_EX=$1
 
 function _getUserEx()

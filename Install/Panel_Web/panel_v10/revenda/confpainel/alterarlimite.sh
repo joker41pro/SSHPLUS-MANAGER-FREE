@@ -7,8 +7,8 @@ then
 	tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "0" ; echo "" ; tput sgr0
 	exit 1
 else
-	
-	
+
+
 	if [[ -z $usuario ]]
 	then
 		tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "1" ; echo "" ; tput sgr0
@@ -16,7 +16,7 @@ else
 	else
 		if [[ `grep -c "^$usuario " $database` -gt 0 ]]
 		then
-			
+
 			if [[ -z $sshnum ]]
 			then
 				tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "2" ; echo "" ; tput sgr0
@@ -41,7 +41,7 @@ else
 						exit
 					fi
 				fi
-			fi			
+			fi
 		else
 			tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "5" ; echo "" ; tput sgr0
 			exit 1
