@@ -89,7 +89,7 @@ function limit1 () {
 	   echo -e "screen -dmS limiter limiter" >> /etc/autostart
    }
    echo -e "\n\033[1;32m  LIMITER ATIVO !\033[0m"
-   sleep 3
+   sleep 2
    menu
 }
 function limit2 () {
@@ -97,17 +97,15 @@ function limit2 () {
    echo -e "\033[1;32mPARANDO O LIMITER... \033[0m"
    echo ""
    fun_stplimiter () {
-      sleep 1
       screen -r -S "limiter" -X quit
       screen -wipe 1>/dev/null 2>/dev/null
       [[ $(grep -wc "limiter" /etc/autostart) != '0' ]] && {
           sed -i '/limiter/d' /etc/autostart
       }
-      sleep 1
    }
-   fun_bar 'fun_stplimiter' 'sleep 3'
+   fun_bar 'fun_stplimiter'
    echo -e "\n\033[1;31m LIMITER PARADO !\033[0m"
-   sleep 3
+   sleep 2
    menu
 }
 function limit_ssh () {
@@ -311,7 +309,7 @@ echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━�
 echo ""
 echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;31m?\033[1;37m : "; read x
 
-case "$x" in 
+case "$x" in
    1 | 01)
    clear
    criarusuario
@@ -331,7 +329,7 @@ case "$x" in
    clear
    sshmonitor
    echo -ne "\n\033[1;31mENTER \033[1;33mpara retornar ao \033[1;32mMENU!\033[0m"; read
-   ;;      
+   ;;
    5 | 05)
    clear
    mudardata
@@ -341,7 +339,7 @@ case "$x" in
    clear
    alterarlimite
    sleep 3
-   ;; 
+   ;;
    7 | 07)
    clear
    alterarsenha
@@ -352,7 +350,7 @@ case "$x" in
    expcleaner
    echo ""
    sleep 3
-   ;;     
+   ;;
    9 | 09)
    clear
    infousers
