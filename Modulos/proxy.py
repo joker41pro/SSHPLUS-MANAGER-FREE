@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 # SSHPLUS By @Crazy_vpn
-import socket, threading, _thread, select, signal, sys, time
+import socket, threading, select, sys, time
 print('\033c')
 #conexao
 IP = '0.0.0.0'
@@ -142,7 +142,6 @@ class ConnectionHandler(threading.Thread):
         except Exception as e:
             self.log += ' - error: ' + str(e)
             self.server.printLog(self.log)
-            pass
         finally:
             self.close()
             self.server.removeConn(self)
