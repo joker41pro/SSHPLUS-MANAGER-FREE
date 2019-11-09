@@ -6,12 +6,14 @@
 
 ## :heavy_exclamation_mark: Requerimientos
 
-* RECOMENDADO DEBIAN Y UBUNTU. ALGUNOS DE ELLOS TAMBIÉN PUEDEN FUNCIONAR CON CENTOS.
-* USAR DISTRIBUCION NUEVA O FORMATIADA
+- RECOMENDADO DEBIAN Y UBUNTU. ALGUNOS DE ELLOS TAMBIÉN PUEDEN FUNCIONAR CON CENTOS.
+- USAR DISTRIBUCION NUEVA O FORMATIADA
 
 ## Installation
 
-apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/sshplus.sh; chmod +x sshplus.sh; ./sshplus.sh
+```bash
+wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/sshplus.sh && bash sshplus.sh
+```
 
 ================================================================================
 
@@ -19,21 +21,27 @@ apt-get update -y; apt-get upgrade -y; wget https://raw.githubusercontent.com/al
 
 ## Installation
 
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/tcptweaker.sh; chmod +x tcptweaker.sh; ./tcptweaker.sh
+```bash
+wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/tcptweaker.sh && bash tcptweaker.sh
+```
 
 ============================
 # PanelSSH de Ventas V10 Y V11
 
 ## Installation
 
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/Panel_Web/install_panelweb.sh; chmod +x install_panelweb.sh; ./install_panelweb.sh
+```bash
+wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/Panel_Web/install_panelweb.sh && bash install_panelweb.sh
+```
 
 ============================
 # Capturador de IP
 
 ## Installation
 
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/IP; chmod +x IP; ./IP
+```bash
+wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/IP && bash IP
+```
 
 ```
 * SIN MINERIA! 
