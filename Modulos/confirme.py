@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-import smtplib,socket,sys
-from os import system
+import smtplib,sys
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime
