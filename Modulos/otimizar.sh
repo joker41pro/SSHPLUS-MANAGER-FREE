@@ -4,10 +4,10 @@ fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
  (
-[[ -e $HOME/fim ]] && rm $HOME/fim
+[[ -e "$HOME/fim" ]] && rm "$HOME/fim"
 ${comando[0]} -y > /dev/null 2>&1
 ${comando[1]} -y > /dev/null 2>&1
-touch $HOME/fim
+touch "$HOME/fim"
  ) > /dev/null 2>&1 &
  tput civis
 echo -ne "     \033[1;33mAGUARDE \033[1;37m- \033[1;33m["
@@ -16,7 +16,7 @@ while true; do
    echo -ne "\033[1;31m#"
    sleep 0.05s
    done
-   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   [[ -e "$HOME/fim" ]] && rm "$HOME/fim" && break
    echo -e "\033[1;33m]"
    tput cuu1
    tput dl1
@@ -53,7 +53,7 @@ fun_bar 'apt-get -f remove -y' 'apt-get clean -y'
 clear
 echo -e "\033[1;31m═══════════════════════════════════════════════\033[0m"
 echo ""
-MEM1=`free|awk '/Mem:/ {print int(100*$3/$2)}'`
+MEM1=$(free|awk '/Mem:/ {print int(100*$3/$2)}')
 ram1=$(free -h | grep -i mem | awk {'print $2'})
 ram2=$(free -h | grep -i mem | awk {'print $4'})
 ram3=$(free -h | grep -i mem | awk {'print $3'})
@@ -106,7 +106,7 @@ sleep 1.5s
 clear
 echo -e "\033[1;32m═══════════════════════════════════════════════\033[0m"
 echo ""
-MEM2=`free|awk '/Mem:/ {print int(100*$3/$2)}'`
+MEM2=$(free|awk '/Mem:/ {print int(100*$3/$2)}')
 ram1=$(free -h | grep -i mem | awk {'print $2'})
 ram2=$(free -h | grep -i mem | awk {'print $4'})
 ram3=$(free -h | grep -i mem | awk {'print $3'})
@@ -121,6 +121,6 @@ echo -e " \033[1;33mLivre: \033[1;37m$ram2                   \033[1;33mLivre: \0
 echo ""
 echo -e "\033[1;37mMemória \033[1;32mRAM \033[1;37mapós a Otimizacao:\033[1;36m" $MEM2% 
 echo ""
-echo -e "\033[1;37mEconomia de :\033[1;31m `expr $MEM1 - $MEM2`%\033[0m"
+echo -e "\033[1;37mEconomia de :\033[1;31m $(expr "$MEM1" - "$MEM2")%\033[0m"
 
 echo -e "\033[1;32m═══════════════════════════════════════════════\033[0m"

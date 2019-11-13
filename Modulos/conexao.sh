@@ -53,7 +53,7 @@ if netstat -nltp|grep 'squid' 1>/dev/null 2>/dev/null;then
 	if [[ "$resp" = 's' ]]; then
 		echo -e "\n\033[1;32mREMOVENDO O SQUID PROXY !\033[0m"
 		echo ""
-		rem_sqd () 
+		rem_sqd ()
 		{
 		if [[ -d "/etc/squid/" ]]; then
 			apt-get remove squid -y
@@ -123,7 +123,7 @@ echo "acl url1 dstdomain -i 127.0.0.1
 acl url2 dstdomain -i localhost
 acl url3 dstdomain -i $ipdovps
 acl url4 dstdomain -i /SSHPLUS?
-acl payload url_regex -i "$var_pay"
+acl payload url_regex -i $var_pay
 acl all src 0.0.0.0/0
 
 http_access allow url1
@@ -134,7 +134,7 @@ http_access allow payload
 http_access deny all
 
 #Portas" > $var_sqd
-for Pts in $(echo -e $portass); do
+for Pts in $(echo -e "$portass"); do
 echo -e "http_port $Pts" >> $var_sqd
 [[ -f "/usr/sbin/ufw" ]] && ufw allow $Pts/tcp
 done
@@ -183,7 +183,7 @@ addpt_sqd () {
 		echo -e "\n\033[1;31mPorta invalida!"
 		sleep 2
 		clear
-		fun_conexao		
+		fun_conexao
 	fi
 	verif_ptrs $pt
 	echo -e "\n\033[1;32mADICIONANDO PORTA AO SQUID!"
@@ -304,7 +304,7 @@ fun_drop () {
 				echo ""
 				fun_stplimiter () {
 					pidlimiter=$(ps x|grep "limiter"|awk -F "pts" {'print $1'})
-					kill -9 $pidlimiter
+					kill -9 "$pidlimiter"
 					screen -wipe
 				}
 				fun_bar 'fun_stplimiter' 'sleep 2'
@@ -764,7 +764,7 @@ if [[ -e /etc/openvpn/server.conf ]]; then
             	}
             	function aguarde2 {
                 	helice () {
-                		fun_apchon > /dev/null 2>&1 & 
+                		fun_apchon > /dev/null 2>&1 &
                 		tput civis
                 		while [ -d /proc/$! ]
                 		do

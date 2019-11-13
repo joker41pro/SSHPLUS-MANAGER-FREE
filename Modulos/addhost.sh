@@ -18,7 +18,7 @@ else
 		tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um domínio vazio ou não existente!" ; echo "" ; tput sgr0
 		exit 1
 	else
-		if [[ `grep -c "^$host" $payload` -eq 1 ]]
+		if [[ $(grep -c "^$host" $payload) -eq 1 ]]
 		then
 			tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "O domínio $host já existe no arquivo $payload" ; echo "" ; tput sgr0
 			exit 1

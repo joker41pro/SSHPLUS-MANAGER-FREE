@@ -41,7 +41,6 @@ if [[ -e /etc/openvpn/server.conf ]]; then
   vivo4="navegue.vivo.com.br/controle/"
   vivo5="www.vivo.com.br"
   oi="d1n212ccp6ldpw.cloudfront.net"
-  cert01="/etc/openvpn/client-common.txt"
   if [[ "$hst" == "$vivo1" ]]; then
     Host="Portal Recarga"
   elif [[ "$hst" == "$vivo2" ]]; then
@@ -74,7 +73,7 @@ while true; do
    echo -ne "\033[1;31m#"
    sleep 0.05s
    done
-   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   [[ -e $HOME/fim ]] && rm "$HOME/fim" && break
    echo -e "\033[1;33m]"
    tput cuu1
    tput dl1
@@ -203,30 +202,30 @@ fun_edithost () {
       fun_packhost () {
         _hosts=("$vivo1" "$vivo2" "$vivo3" "$vivo4" "$vivo5")
         [[ ! -d "$HOME/OVPN" ]] && mkdir $HOME/OVPN
-        for host in ${_hosts[@]}; do
+        for host in "${_hosts[@]}"; do
           i=$(( $i + 1 ))
-          if [[ "$(sed -n '7 p' $HOME/$username.ovpn | awk {'print $2'})" = "$oi" ]]; then
-            sed -i "7"d $HOME/$username.ovpn
-            sed -i "7i\remote $rmt2 $_Port" $HOME/$username.ovpn
+          if [[ "$(sed -n '7 p' "$HOME/$username.ovpn" | awk {'print $2'})" = "$oi" ]]; then
+            sed -i "7"d "$HOME/$username.ovpn"
+            sed -i "7i\remote $rmt2 $_Port" "$HOME/$username.ovpn"
           fi
-          sed -i "8"d $HOME/$username.ovpn
-          sed -i "8i\http-proxy-option CUSTOM-HEADER Host $host" $HOME/$username.ovpn
+          sed -i "8"d "$HOME/$username.ovpn"
+          sed -i "8i\http-proxy-option CUSTOM-HEADER Host $host" "$HOME/$username.ovpn"
           sleep 0.3
-          cp $HOME/$username.ovpn /root/OVPN/$username$i.ovpn
+          cp "$HOME/$username.ovpn" "/root/OVPN/$username$i.ovpn"
         done
-        hst3=$(sed -n '8 p' $HOME/$username.ovpn | awk {'print $4'})
-        sed -i "7"d $HOME/$username.ovpn
-        sed -i "7i\remote $oi $_Port" $HOME/$username.ovpn
-        sed -i "s;$hst3;$oi;" $HOME/$username.ovpn
-        cp $HOME/$username.ovpn $HOME/OVPN/$username-oi.ovpn
+        hst3=$(sed -n '8 p' "$HOME/$username.ovpn"  | awk {'print $4'})
+        sed -i "7"d "$HOME/$username.ovpn"
+        sed -i "7i\remote $oi $_Port" "$HOME/$username.ovpn"
+        sed -i "s;$hst3;$oi;" "$HOME/$username.ovpn"
+        cp "$HOME/$username.ovpn" "$HOME/$username.ovpn"
         sleep 1
-        sed -i "7"d $HOME/$username.ovpn
-        sed -i "7i\remote $rmt3" $HOME/$username.ovpn
-        sed -i "s;$oi;$IP:$_Port;" $HOME/$username.ovpn
-        sed -i "s;http-proxy $IP 80;http-proxy $prx 80;" $HOME/$username.ovpn
-        cp $HOME/$username.ovpn $HOME/OVPN/$username-MMS.ovpn
-        cd $HOME/OVPN && zip $username.zip *.ovpn > /dev/null 2>&1 && cp $username.zip $HOME/$username.zip
-        cd $HOME && rm -rf /root/OVPN > /dev/null 2>&1
+        sed -i "7"d "$HOME/$username.ovpn"
+        sed -i "7i\remote $rmt3" "$HOME/$username.ovpn"
+        sed -i "s;$oi;$IP:$_Port;" "$HOME/$username.ovpn"
+        sed -i "s;http-proxy $IP 80;http-proxy $prx 80;" "$HOME/$username.ovpn"
+        cp "$HOME/$username.ovpn" "$HOME/OVPN/$username-MMS.ovpn"
+        cd "$HOME/OVPN" && zip "$username.zip" ./*.ovpn > /dev/null 2>&1 && cp "$username.zip" "$HOME/$username.zip"
+        cd "$HOME" && rm -rf /root/OVPN > /dev/null 2>&1
       }
       fun_bar 'fun_packhost'
       echo ""
@@ -267,18 +266,18 @@ then
   tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Este usuário já existe. tente outro nome." ; echo "" ; tput sgr0
   exit 1  
 else
-  if (echo $username | egrep [^a-zA-Z0-9.-_] &> /dev/null)
+  if (echo "$username" | grep -E [^a-zA-Z0-9.-_] &> /dev/null)
   then
     tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um nome de usuário inválido!" ; tput setab 1 ; echo "Use apenas letras, números, pontos e traços." ; tput setab 4 ; echo "Não use espaços, acentos ou caracteres especiais!" ; echo "" ; tput sgr0
     exit 1
   else
-    sizemin=$(echo ${#username})
+    sizemin=${#username}
     if [[ $sizemin -lt 2 ]]
     then
       tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um nome de usuário muito curto," ; echo "use no mínimo dois caracteres!" ; echo "" ; tput sgr0
       exit 1
     else
-      sizemax=$(echo ${#username})
+      sizemax=${#username}
       if [[ $sizemax -gt 32 ]]
       then
         tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um nome de usuário muito grande," ; echo "use no máximo 32 caracteres!" ; echo "" ; tput sgr0
@@ -295,14 +294,14 @@ else
             tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou uma senha vazia!" ; echo "" ; tput sgr0
             exit 1
           else
-            sizepass=$(echo ${#password})
+            sizepass=${#password}
             if [[ $sizepass -lt 4 ]]
             then
               tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Senha curta!, use no mínimo 4 caracteres" ; echo "" ; tput sgr0
               exit 1
             else  
                 echo -ne "\033[1;32mDias Para Expirar:\033[1;37m "; read dias
-              if (echo $dias | egrep '[^0-9]' &> /dev/null)
+              if (echo "$dias" | grep -E '[^0-9]' &> /dev/null)
               then
                 tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um número de dias inválido!" ; echo "" ; tput sgr0
                 exit 1
@@ -318,7 +317,7 @@ else
                     exit 1
                   else
                       echo -ne "\033[1;32mLimite De Conexões:\033[1;37m "; read sshlimiter
-                    if (echo $sshlimiter | egrep '[^0-9]' &> /dev/null)
+                    if (echo "$sshlimiter" | grep -E '[^0-9]' &> /dev/null)
                     then
                       tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Você digitou um número de conexões inválido!" ; echo "" ; tput sgr0
                       exit 1
@@ -335,15 +334,15 @@ else
                         else
                           final=$(date "+%Y-%m-%d" -d "+$dias days")
                           gui=$(date "+%d/%m/%Y" -d "+$dias days")
-                          pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+                          pass=$(perl -e 'print crypt($ARGV[0], "password")' "$password")
                           sleep 0.5s
-                          useradd -e $final -M -s /bin/false -p $pass $username
-                          echo "$password" > /etc/SSHPlus/senha/$username
+                          useradd -e "$final" -M -s /bin/false -p "$pass" "$username"
+                          echo "$password" > "/etc/SSHPlus/senha/$username"
                           echo "$username $sshlimiter" >> /root/usuarios.db
                           if [[ -e /etc/openvpn/server.conf ]]; then
                               echo -ne "\033[1;32mGerar Arquivo Ovpn \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read resp
                               if [[ "$resp" = @(s|S) ]]; then
-                                rm $username.zip $username.ovpn > /dev/null 2>&1
+                                rm "$username.zip" "$username.ovpn" > /dev/null 2>&1
                                 echo -ne "\033[1;32mGerar Com usuário e Senha \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read respost
                                 echo -ne "\033[1;32mHost Atual\033[1;37m: \033[1;31m(\033[1;37m$Host\033[1;31m) \033[1;37m- \033[1;32mAlterar \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read oprc
                                 if [[ "$oprc" = @(s|S) ]]; then
@@ -353,7 +352,7 @@ else
                                 fi
                                 gerarovpn () {
                                   if [[ ! -e "/root/$username.zip" ]]; then
-                                    zip /root/$username.zip /root/$username.ovpn
+                                    zip "/root/$username.zip" "/root/$username.ovpn"
                                     sleep 1.5
                                   fi
                                 }
@@ -383,7 +382,7 @@ else
                                 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
                                 echo ""
                                 if [ -d /var/www/html/openvpn ]; then
-                                  mv $HOME/$username.zip /var/www/html/openvpn/$username.zip > /dev/null 2>&1
+                                  mv "$HOME/$username.zip" "/var/www/html/openvpn/$username.zip" > /dev/null 2>&1
                                   if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
                                     echo -e "\033[1;32mLINK\033[1;37m: \033[1;36m$IP:81/html/openvpn/$username.zip"
                                   else

@@ -4,10 +4,10 @@ fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
  (
-[[ -e $HOME/fim ]] && rm $HOME/fim
+[[ -e $HOME/fim ]] && rm "$HOME/fim"
 ${comando[0]} -y > /dev/null 2>&1
 ${comando[1]} -y > /dev/null 2>&1
-touch $HOME/fim
+touch "$HOME/fim"
  ) > /dev/null 2>&1 &
  tput civis
 echo -ne "\033[1;33m["
@@ -16,7 +16,7 @@ while true; do
    echo -ne "\033[1;31m#"
    sleep 0.05s
    done
-   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   [[ -e "$HOME/fim" ]] && rm "$HOME/fim" && break
    echo -e "\033[1;33m]"
    tput cuu1
    tput dl1
@@ -166,10 +166,10 @@ if [[ "$resposta" = 's' ]]; then
 	echo -e "\033[1;32mINSTALANDO O BADVPN... \033[1;37m"
 	echo ""
 	inst_udp () {
-	cd $HOME
+	cd "$HOME"
    wget https://www.dropbox.com/s/tgkxdwb03r7w59r/badvpn-udpgw -o /dev/null
-   mv -f $HOME/badvpn-udpgw /bin/badvpn-udpgw
-   chmod 777 /bin/badvpn-udpgw
+   mv -f "$HOME/badvpn-udpgw" /bin/badvpn-udpgw
+   chmod +x /bin/badvpn-udpgw
 	}
 	fun_bar 'inst_udp'
 	echo ""

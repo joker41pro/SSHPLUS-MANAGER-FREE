@@ -39,8 +39,7 @@ echo -e "\e[1DOk"
 geralink () {
 	if [ -d /var/www/html/backup ]; then
 		rm -rf /var/www/html/backup/backup.vps > /dev/null 2>&1
-		cp $HOME/backup.vps /var/www/html/backup/backup.vps
-		sleep 2
+		cp "$HOME/backup.vps" /var/www/html/backup/backup.vps
 	fi
 }
 fun_temp2 () {
@@ -71,7 +70,7 @@ echo -ne "\033[1;32mOQUE DESEJA FAZER\033[1;31m ?\033[1;37m : "; read opcao
 if [[ "$opcao" = '1' ]]; then
 	if [ -f "/root/usuarios.db" ]
 	then
-	    rm -rf $HOME/backup.vps > /dev/null 2>&1
+	    rm -rf "$HOME/backup.vps" > /dev/null 2>&1
 	    sleep 1
 		tar cvf /root/backup.vps /root/usuarios.db /etc/shadow /etc/passwd /etc/group /etc/gshadow > /dev/null 2>&1
 		echo ""
@@ -95,7 +94,6 @@ if [[ "$opcao" = '1' ]]; then
 			fi
 		else
 			echo -e "\n\033[1;32mDisponivel em\033[1;31m" ~/"backup.vps\033[0m"
-			sleep 2
 			menu
 		fi
 	else
@@ -103,7 +101,6 @@ if [[ "$opcao" = '1' ]]; then
 		echo -e "\033[1;32mCriando backup...\033[0m"
 		echo ""
 		tar cvf /root/backup.vps /etc/shadow /etc/passwd /etc/group /etc/gshadow > /dev/null 2>&1
-        sleep 2s
 		echo ""
 		echo -e "\033[1;33mO Arquivo \033[1;32mbackup.vps"
         echo -e "\033[1;33mfoi criado com sucesso no diretório \033[1;31m/root\033[0m"
@@ -116,7 +113,6 @@ if [[ "$opcao" = '2' ]]; then
 		echo ""
 		echo -e "\033[1;36mRestaurando backup..."
 		echo ""
-		sleep 2s
 		cp /root/backup.vps /backup.vps
 		cd /
 		tar -xvf backup.vps

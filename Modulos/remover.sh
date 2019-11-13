@@ -7,10 +7,7 @@ user="$1"
 cd /etc/openvpn/easy-rsa/
 ./easyrsa --batch revoke $user
 ./easyrsa gen-crl
-rm -rf pki/reqs/$user.req
-rm -rf pki/private/$user.key
-rm -rf pki/issued/$user.crt
-rm -rf /etc/openvpn/crl.pem
+rm -rf "pki/reqs/$user.req" "pki/private/$user.key" "pki/issued/$user.crt" /etc/openvpn/crl.pem
 cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 } > /dev/null 2>&1
@@ -33,7 +30,7 @@ echo""
 i=0
 while read users
    do
-       userr="$(echo $users | cut -d' ' -f1)"
+       userr="$(echo "$users" | cut -d' ' -f1)"
        i=$(expr $i + 1)
        oP+=$i
        [[ $i == [1-9] ]] && oP+=" 0$i" && i=0$i
@@ -62,19 +59,19 @@ else
 			deluser --force $user > /dev/null 2>&1
 			echo ""
 			echo -e "\E[41;1;37m Usuario $user removido com sucesso! \E[0m"
-			grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
+			grep -v "^$user[[:space:]]" /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 			rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
-				remove_ovp $user
+				remove_ovp "$user"
 		    fi
 			exit 1
 		else
 		    echo ""
 			tput setaf 7 ; tput setab 4 ; tput bold ; echo "" ; echo "Usuário conectado. Desconectando..." ; tput sgr0
 			pkill -f "$user" > /dev/null 2>&1
-			deluser --force $user > /dev/null 2>&1
+			deluser --force "$user" > /dev/null 2>&1
 			echo -e "\E[41;1;37m Usuario $user removido com sucesso! \E[0m"
-			grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
+			grep -v "^$user[[:space:]]" /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 			rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 			if [[ -e /etc/openvpn/server.conf ]]; then
 				remove_ovp $user
@@ -87,7 +84,7 @@ else
 		pkill -f "$user" > /dev/null 2>&1
 		deluser --force $user > /dev/null 2>&1
 		echo -e "\E[41;1;37m Usuario $user removido com sucesso! \E[0m"
-		grep -v ^$user[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
+		grep -v "^$user[[:space:]]" /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 		rm /etc/SSHPlus/senha/$user 1>/dev/null 2>/dev/null
 		if [[ -e /etc/openvpn/server.conf ]]; then
 			remove_ovp $user
@@ -111,7 +108,7 @@ elif [[ "$resp" = "2" ]]; then
 		   remove_ovp $user
 		fi
 		done
-		rm $HOME/usuarios.db && touch $HOME/usuarios.db
+		rm "$HOME/usuarios.db" && touch "$HOME/usuarios.db"
         rm *.zip > /dev/null 2>&1
 		echo -e "\n\033[1;32mUSUARIOS REMOVIDOS COM SUCESSO!\033[0m"
 		sleep 2

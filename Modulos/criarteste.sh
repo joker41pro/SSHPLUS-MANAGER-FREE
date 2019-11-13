@@ -51,14 +51,14 @@ useradd -M -s /bin/false $nome
 echo "$pass" > /etc/SSHPlus/senha/$nome
 echo "$nome $limit" >> /root/usuarios.db
 echo "#!/bin/bash
-pkill -f "$nome"
+pkill -f \"$nome\"
 userdel --force $nome
-grep -v ^$nome[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
+grep -v \"^$nome[[:space:]]\" /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 rm /etc/SSHPlus/senha/$nome > /dev/null 2>&1
 rm -rf /etc/SSHPlus/userteste/$nome.sh
-exit" > /etc/SSHPlus/userteste/$nome.sh
-chmod +x /etc/SSHPlus/userteste/$nome.sh
-at -f /etc/SSHPlus/userteste/$nome.sh now + $u_temp min > /dev/null 2>&1
+exit" > "/etc/SSHPlus/userteste/$nome.sh"
+chmod +x "/etc/SSHPlus/userteste/$nome.sh"
+at -f "/etc/SSHPlus/userteste/$nome.sh" now + "$u_temp" min > /dev/null 2>&1
 clear
 echo -e "\E[44;1;37m     Usuario Teste Criado     \E[0m"
 echo ""

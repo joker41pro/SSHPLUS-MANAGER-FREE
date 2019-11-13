@@ -13,14 +13,14 @@ while read user; do
 	i=$(expr $i + 1)
 	_oP=$i
 	[[ $i == [1-9] ]] && i=0$i && oP+=" 0$i"
-	expire="$(chage -l $user | grep -E "Account expires" | cut -d ' ' -f3-)"
+	expire="$(chage -l "$user" | grep -E "Account expires" | cut -d ' ' -f3-)"
 	if [[ $expire == "never" ]]
 	then
 		echo -e "\033[1;33m[\033[1;31m$i\033[1;33m] \033[1;37m- \033[1;32m$user       \033[1;33m00/00/0000     S/DATA\033[0m"
 	else
 		databr="$(date -d "$expire" +"%Y%m%d")"
 		hoje="$(date -d today +"%Y%m%d")"
-		if [ $hoje -ge $databr ]
+		if [ "$hoje" -ge "$databr" ]
 		then
 			_user=$(echo -e "\033[1;33m[\033[1;31m$i\033[1;33m] \033[1;37m- \033[1;32m$user\033[1;37m")
 			datanormal="$(date -d"$expire" '+%d/%m/%Y')"
@@ -58,7 +58,7 @@ then
 	echo ""
 	exit 1
 else
-	if [[ `grep -c /$usuario: /etc/passwd` -ne 0 ]]
+	if [[ $(grep -c /"$usuario": /etc/passwd) -ne 0 ]]
 	then
 	    echo ""
 	    echo -e "\033[1;31mEX:\033[1;33m(\033[1;32mDATA: \033[1;37mDIA/MÊS/ANO \033[1;33mOU \033[1;32mDIAS: \033[1;37m30\033[1;33m)"
@@ -80,7 +80,7 @@ else
 				echo ""
 				exit 1	
 			else
-				if (echo $inputdate | egrep [^a-zA-Z] &> /dev/null)
+				if (echo "$inputdate" | egrep [^a-zA-Z] &> /dev/null)
 				then
 					today="$(date -d today +"%Y%m%d")"
 					timemachine="$(date -d "$sysdate" +"%Y%m%d")"
@@ -91,7 +91,7 @@ else
 						echo ""
 						exit 1
 					else
-						chage -E $sysdate $usuario
+						chage -E "$sysdate" "$usuario"
 						uexpired
 						echo ""
 						tput setaf 7 ; tput setab 4 ; tput bold ; echo "Sucesso Usuário $usuario nova data: $udata " ; tput sgr0

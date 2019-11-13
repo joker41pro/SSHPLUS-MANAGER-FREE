@@ -10,7 +10,7 @@ fun_prog ()
 	do
 		for i in / - \\ \|
 		do
-			sleep .1
+			sleep .05
 			echo -ne "\e[1D$i"
 		done
 	done

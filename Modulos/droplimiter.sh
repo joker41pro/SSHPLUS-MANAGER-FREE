@@ -45,8 +45,8 @@ do
     echo -e "\E[42;1;37m Ususario                       Conexao/Limite \E[0m"
     while read usline
     do
-		user="$(echo $usline | cut -d' ' -f1)"
-		s2ssh="$(echo $usline | cut -d' ' -f2)"
+		user="$(echo "$usline" | cut -d' ' -f1)"
+		s2ssh="$(echo "$usline" | cut -d' ' -f2)"
 		s3drop="$(fun_drop | grep "$user" | wc -l)"
 		if [ -z "$user" ] ; then
 		    echo "" > /dev/null
@@ -54,13 +54,13 @@ do
 		    fun_drop | grep "$user" | awk '{print $2}' |cut -d' ' -f2 > /tmp/userpid
 		    sed -n '2 p' /tmp/userpid > /tmp/tmp2
 		    rm /tmp/userpid
-		    tput setaf 3 ; tput bold ; printf '  %-35s%s\n' $user $s3drop/$s2ssh; tput sgr0
+		    tput setaf 3 ; tput bold ; printf '  %-35s%s\n' "$user" "$s3drop"/"$s2ssh"; tput sgr0
 		    if [ "$s3drop" -gt "$s2ssh" ]; then
 		        echo -e "\E[41;1;37m Usuário desconectado por ultrapassar o limite! \E[0m"
 		        while read line
 		        do
-		           tmp="$(echo $line | cut -d' ' -f1)"
-		           kill $tmp
+		           tmp="$(echo "$line" | cut -d' ' -f1)"
+		           kill "$tmp"
 		        done < /tmp/tmp2
 		        rm /tmp/tmp2
 		    fi

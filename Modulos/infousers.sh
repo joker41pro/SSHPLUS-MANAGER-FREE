@@ -2,24 +2,24 @@
 clear
 database="$HOME/usuarios.db"
 fun_drop () {
-port_dropbear=`ps aux | grep dropbear | awk NR==1 | awk '{print $17;}'`
+port_dropbear=$(ps aux | grep dropbear | awk NR==1 | awk '{print $17;}')
 log=/var/log/auth.log
 loginsukses='Password auth succeeded'
 clear
-pids=`ps ax |grep dropbear |grep  " $port_dropbear" |awk -F" " '{print $1}'`
+pids=$(ps ax | grep dropbear | grep  " $port_dropbear" | awk -F" " '{print $1}')
 for pid in $pids
 do
-    pidlogs=`grep $pid $log |grep "$loginsukses" |awk -F" " '{print $3}'`
+    pidlogs=$(grep "$pid" "$log" | grep "$loginsukses" | awk -F" " '{print $3}')
     i=0
     for pidend in $pidlogs
     do
       let i=i+1
     done
     if [ $pidend ];then
-       login=`grep $pid $log |grep "$pidend" |grep "$loginsukses"`
+       login=$(grep "$pid" "$log" |grep "$pidend" |grep "$loginsukses")
        PID=$pid
-       user=`echo $login |awk -F" " '{print $10}' | sed -r "s/'/ /g"`
-       waktu=`echo $login |awk -F" " '{print $2"-"$1,$3}'`
+       user=$(echo "$login" | awk -F" " '{print $10}' | sed -r "s/'/ /g")
+       waktu=$(echo "$login" | awk -F" " '{print $2"-"$1,$3}')
        while [ ${#waktu} -lt 13 ]; do
            waktu=$waktu" "
        done
