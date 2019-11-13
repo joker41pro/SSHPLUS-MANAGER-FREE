@@ -136,25 +136,25 @@ class ConnectionHandler(threading.Thread):
         try:
             self.client_buffer = self.client.recv(BUFLEN)
 
-            host_port = self.find_header(self.client_buffer, 'X-Real-Host')
+            host_port = find_header(self.client_buffer, 'X-Real-Host')
 
             if host_port == '':
                 host_port = DEFAULT_HOST
 
-            split = self.find_header(self.client_buffer, 'X-Split')
+            split = find_header(self.client_buffer, 'X-Split')
 
             if split != '':
                 self.client.recv(BUFLEN)
 
             if host_port != '':
-                passwd = self.find_header(self.client_buffer, 'X-Pass')
+                passwd = find_header(self.client_buffer, 'X-Pass')
 
                 if len(PASS) != 0 and passwd == PASS:
-                    self.method_CONNECT(host_port)
+                    self.method_connect(host_port)
                 elif len(PASS) != 0 and passwd != PASS:
                     self.client.send('HTTP/1.1 400 WrongPass!\r\n\r\n')
                 if host_port.startswith(IP):
-                    self.method_CONNECT(host_port)
+                    self.method_connect(host_port)
                 else:
                     self.client.send('HTTP/1.1 403 Forbidden!\r\n\r\n')
             else:
@@ -191,7 +191,7 @@ class ConnectionHandler(threading.Thread):
         self.client.sendall(RESPONSE.encode())
         self.client_buffer = ''
         self.server.print_log(self.log)
-        self.doCONNECT()
+        self.do_connect()
 
     def do_connect(self):
         socs = [self.client, self.target]
