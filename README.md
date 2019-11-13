@@ -1,15 +1,23 @@
-﻿# SSHPLUS-MANAGER-FREE
+# SSHPLUS Manager Mod
 
-![logo](https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/SSHPLUS_MANAGER.jpg)
+![logo](https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/SSHPLUS_MANAGER.png)
 
-**Manager Script**
+## Alterações do mod
 
-## :heavy_exclamation_mark: Requerimientos
+- Instalação simplificada.
+- Script proxy socks convertido para Python 3.
+- Navegação mais rápida entre seções.
+- Aumentado o limite de caracteres na criação de um usuário para 32.
+- Corrigido erros no script quando o idioma do servidor não está em inglês.
+- Otimizações gerais e correções de bugs.
+- Otimizado para versões recentes do Ubuntu e Debian.
 
-- RECOMENDADO DEBIAN Y UBUNTU. ALGUNOS DE ELLOS TAMBIÉN PUEDEN FUNCIONAR CON CENTOS.
-- USAR DISTRIBUCION NUEVA O FORMATIADA
+## :heavy_exclamation_mark: Requisitos
 
-## Installation
+- Recomendado usar Debian ou Ubuntu.
+- Usar distro nova ou formatada. (para evitar futuros problemas)
+
+## Instalação
 
 ```bash
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/sshplus.sh && bash sshplus.sh
@@ -19,16 +27,16 @@ wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/maste
 
 # TCP-Tweaker-1.0 (TCP-SPEED)
 
-## Installation
+## Instalação
 
 ```bash
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/tcptweaker.sh && bash tcptweaker.sh
 ```
 
 ============================
-# PanelSSH de Ventas V10 Y V11
+# PanelSSH de vendas V10 e V11
 
-## Installation
+## Instalação
 
 ```bash
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/Panel_Web/install_panelweb.sh && bash install_panelweb.sh
@@ -37,11 +45,13 @@ wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/maste
 ============================
 # Capturador de IP
 
-## Installation
+## Instalação
 
 ```bash
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/IP && bash IP
 ```
+
+# Footer do repo original
 
 ```
 * SIN MINERIA! 
