@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
 # encoding: utf-8
 # SSHPLUS By @Crazy_vpn
-import socket, threading, select, sys, time
+import select
+import socket
+import sys
+import threading
+import time
+
 print('\033c')
-#conexao
+# conexao
 IP = '0.0.0.0'
 try:
-   PORT = int(sys.argv[1])
-except:
-   PORT = 80
+    PORT = int(sys.argv[1])
+except (IndexError, ValueError):
+    PORT = 80
 PASS = ''
 BUFLEN = 4096 * 4
 TIMEOUT = 60
@@ -16,9 +21,11 @@ MSG = 'SSHPLUS'
 DEFAULT_HOST = '0.0.0.0:22'
 RESPONSE = "HTTP/1.1 200 " + str(MSG) + "\r\nContent-length: 0\r\n\r\n \r\n\r\n"
 
+
 class Server(threading.Thread):
     def __init__(self, host, port):
         threading.Thread.__init__(self)
+        self.soc = socket.socket(socket.AF_INET)
         self.running = False
         self.host = host
         self.port = port
@@ -27,7 +34,6 @@ class Server(threading.Thread):
         self.logLock = threading.Lock()
 
     def run(self):
-        self.soc = socket.socket(socket.AF_INET)
         self.soc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.soc.settimeout(2)
         self.soc.bind((self.host, self.port))
@@ -43,18 +49,18 @@ class Server(threading.Thread):
                     continue
 
                 conn = ConnectionHandler(c, self, addr)
-                conn.start();
-                self.addConn(conn)
+                conn.start()
+                self.add_conn(conn)
         finally:
             self.running = False
             self.soc.close()
 
-    def printLog(self, log):
+    def print_log(self, log):
         self.logLock.acquire()
         print(log)
         self.logLock.release()
 
-    def addConn(self, conn):
+    def add_conn(self, conn):
         try:
             self.threadsLock.acquire()
             if self.running:
@@ -62,7 +68,7 @@ class Server(threading.Thread):
         finally:
             self.threadsLock.release()
 
-    def removeConn(self, conn):
+    def remove_conn(self, conn):
         try:
             self.threadsLock.acquire()
             self.threads.remove(conn)
@@ -81,12 +87,28 @@ class Server(threading.Thread):
             self.threadsLock.release()
 
 
+def find_header(head, header):
+    aux = head.find((header + ': ').encode())
+
+    if aux == -1:
+        return ''
+
+    aux = head.find(':', aux)
+    head = head[aux+2:]
+    aux = head.find('\r\n')
+
+    if aux == -1:
+        return ''
+
+    return head[:aux]
+
+
 class ConnectionHandler(threading.Thread):
-    def __init__(self, socClient, server, addr):
+    def __init__(self, soc_client, server, addr):
         threading.Thread.__init__(self)
         self.clientClosed = False
         self.targetClosed = True
-        self.client = socClient
+        self.client = soc_client
         self.client_buffer = ''
         self.server = server
         self.log = 'Conexao: ' + str(addr)
@@ -114,52 +136,37 @@ class ConnectionHandler(threading.Thread):
         try:
             self.client_buffer = self.client.recv(BUFLEN)
 
-            hostPort = self.findHeader(self.client_buffer, 'X-Real-Host')
+            host_port = self.find_header(self.client_buffer, 'X-Real-Host')
 
-            if hostPort == '':
-                hostPort = DEFAULT_HOST
+            if host_port == '':
+                host_port = DEFAULT_HOST
 
-            split = self.findHeader(self.client_buffer, 'X-Split')
+            split = self.find_header(self.client_buffer, 'X-Split')
 
             if split != '':
                 self.client.recv(BUFLEN)
 
-            if hostPort != '':
-                passwd = self.findHeader(self.client_buffer, 'X-Pass')
+            if host_port != '':
+                passwd = self.find_header(self.client_buffer, 'X-Pass')
 
                 if len(PASS) != 0 and passwd == PASS:
-                    self.method_CONNECT(hostPort)
+                    self.method_CONNECT(host_port)
                 elif len(PASS) != 0 and passwd != PASS:
                     self.client.send('HTTP/1.1 400 WrongPass!\r\n\r\n')
-                if hostPort.startswith(IP):
-                    self.method_CONNECT(hostPort)
+                if host_port.startswith(IP):
+                    self.method_CONNECT(host_port)
                 else:
-                   self.client.send('HTTP/1.1 403 Forbidden!\r\n\r\n')
+                    self.client.send('HTTP/1.1 403 Forbidden!\r\n\r\n')
             else:
                 print('- No X-Real-Host!')
                 self.client.send('HTTP/1.1 400 NoXRealHost!\r\n\r\n')
 
         except Exception as e:
             self.log += ' - error: ' + str(e)
-            self.server.printLog(self.log)
+            self.server.print_log(self.log)
         finally:
             self.close()
-            self.server.removeConn(self)
-
-    def findHeader(self, head, header):
-        aux = head.find((header + ': ').encode())
-
-        if aux == -1:
-            return ''
-
-        aux = head.find(':', aux)
-        head = head[aux+2:]
-        aux = head.find('\r\n')
-
-        if aux == -1:
-            return ''
-
-        return head[:aux];
+            self.server.remove_conn(self)
 
     def connect_target(self, host):
         i = host.find(':')
@@ -167,7 +174,7 @@ class ConnectionHandler(threading.Thread):
             port = int(host[i+1:])
             host = host[:i]
         else:
-            if self.method=='CONNECT':
+            if self.method == 'CONNECT':
                 port = 443
             else:
                 port = 22
@@ -178,15 +185,15 @@ class ConnectionHandler(threading.Thread):
         self.targetClosed = False
         self.target.connect(address)
 
-    def method_CONNECT(self, path):
+    def method_connect(self, path):
         self.log += ' - CONNECT ' + path
         self.connect_target(path)
         self.client.sendall(RESPONSE.encode())
         self.client_buffer = ''
-        self.server.printLog(self.log)
+        self.server.print_log(self.log)
         self.doCONNECT()
 
-    def doCONNECT(self):
+    def do_connect(self):
         socs = [self.client, self.target]
         count = 0
         error = False
@@ -220,20 +227,21 @@ class ConnectionHandler(threading.Thread):
                 break
 
 
-
-def main(host=IP, port=PORT):
-    print("\033[0;34m━"*8,"\033[1;32m PROXY SOCKS","\033[0;34m━"*8,"\n")
+def main():
+    print("\033[0;34m━"*8, "\033[1;32m PROXY SOCKS", "\033[0;34m━"*8, "\n")
     print("\033[1;33mIP:\033[1;32m " + IP)
     print("\033[1;33mPORTA:\033[1;32m " + str(PORT) + "\n")
-    print("\033[0;34m━"*10,"\033[1;32m SSHPLUS","\033[0;34m━\033[1;37m"*11,"\n")
+    print("\033[0;34m━"*10, "\033[1;32m SSHPLUS", "\033[0;34m━\033[1;37m"*11, "\n")
     server = Server(IP, PORT)
     server.start()
     while True:
         try:
-            time.sleep(2)
+            time.sleep(4)
         except KeyboardInterrupt:
             print('\nParando...')
             server.close()
             break
+
+
 if __name__ == '__main__':
     main()
