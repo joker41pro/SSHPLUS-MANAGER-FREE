@@ -15,7 +15,7 @@ fun_drop () {
 }
 
 fun_killopen () {
-(	
+(
 _pidsovp=$1
 telnet localhost 7505 <<EOF
 kill $_pidsovp
@@ -54,12 +54,10 @@ fun_multilogin () {
 					kill -9 "$pidssh"
 				done
 	        }
-	        sleep 3
 	    done < "$database"
 	    ) &
 }
 while true; do
-fun_multilogin
-sleep 7
+	fun_multilogin
+	sleep 10
 done
-

@@ -34,12 +34,12 @@ wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/maste
 ```
 
 ============================
-# PanelSSH de vendas V10 e V11
+# Painel SSHPLUS Web
 
 ## Instalação
 
 ```bash
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/Panel_Web/install_panelweb.sh && bash install_panelweb.sh
+wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/Panel_Web/Panelweb.sh && bash Panelweb.sh
 ```
 
 ============================

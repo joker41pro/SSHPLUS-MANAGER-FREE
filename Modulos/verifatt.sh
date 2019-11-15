@@ -7,5 +7,3 @@ wget -P /home https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-F
     vrs2=$(sed -n '1 p' /home/versao | sed -e 's/[^0-9]//ig')
 	[[ "$vrs1" != "$vrs2" ]] && mv /home/versao /tmp/att
 }
-
-

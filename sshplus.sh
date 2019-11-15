@@ -1,10 +1,6 @@
 #!/bin/bash
 
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/list -O list > /dev/null 2>&1
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/versao -O /bin/versao > /dev/null 2>&1
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/licence -O /usr/lib/licence > /dev/null 2>&1
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/sshplus -O /home/sshplus > /dev/null 2>&1
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/versao -O /home/versao > /dev/null 2>&1
+wget https://raw.githubusercontent.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/master/Install/list -O list > /dev/null 2>&1
 
 clear
 RUNDIR=$PWD
@@ -97,11 +93,6 @@ echo -e "    \033[1;33mATUALIZAÇÕES COSTUMA DEMORAR UM POUCO!\033[0m"
 echo ""
 fun_attlist () {
     apt-get update -y
-    if service apache2 status; then
-    service apache2 stop
-    else
-    apt-get remove apache2 -y
-    fi
 }
 fun_bar 'fun_attlist'
 sleep 1
@@ -135,6 +126,7 @@ echo ""
 cd $_lsk
 fun_bar 'source list'
 rm sshplus* > /dev/null 2>&1
+rm list > /dev/null 2>&1
 clear
 apt-get install lsof > /dev/null 2>&1
 echo ""
