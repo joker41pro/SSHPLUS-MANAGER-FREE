@@ -96,46 +96,9 @@ backbot=$1
 				fi
 			else
 				echo -e "\n\033[1;32mDisponivel em\033[1;31m" ~/"backup.vps\033[0m"
-				sleep 2
 				menu
 			fi
 		else
-<<<<<<< HEAD
-			echo -e "\n\033[1;32mDisponivel em\033[1;31m" ~/"backup.vps\033[0m"
-			menu
-		fi
-	else
-		echo ""
-		echo -e "\033[1;32mCriando backup...\033[0m"
-		echo ""
-		tar cvf /root/backup.vps /etc/shadow /etc/passwd /etc/group /etc/gshadow > /dev/null 2>&1
-		echo ""
-		echo -e "\033[1;33mO Arquivo \033[1;32mbackup.vps"
-        echo -e "\033[1;33mfoi criado com sucesso no diretório \033[1;31m/root\033[0m"
-		echo ""
-	fi
-fi
-if [[ "$opcao" = '2' ]]; then
-	if [ -f "/root/backup.vps" ]
-	then
-		echo ""
-		echo -e "\033[1;36mRestaurando backup..."
-		echo ""
-		cp /root/backup.vps /backup.vps
-		cd /
-		tar -xvf backup.vps
-		rm /backup.vps
-		echo ""
-		echo -e "\033[1;36mUsuários e\033[1;36m senhas importados com sucesso.\033[0m"
-		echo ""
-		exit
-	else
-		echo ""
-		echo -e "\033[1;33mO arquivo \033[1;32mbackup.vps \033[1;33mnão foi encontrado!\033[0m"
-		echo -e "\033[1;33mCeritifique-se que ele esteja localizado no diretório /root/ com o nome \033[1;32mbackup.vps\033[0m"
-		echo ""
-		exit
-=======
 			echo ""
 			echo -e "\033[1;32mCriando backup...\033[0m"
 			echo ""
@@ -153,7 +116,6 @@ if [[ "$opcao" = '2' ]]; then
 			echo ""
 			echo -e "\033[1;36mRestaurando backup..."
 			echo ""
-			sleep 2s
 			cp /root/backup.vps /backup.vps
 			cd /
 			tar -xvf backup.vps
@@ -172,7 +134,6 @@ if [[ "$opcao" = '2' ]]; then
 	fi
 	if [[ "$opcao" = '3' ]]; then
 		menu
->>>>>>> d92c6de4420261898eeecca5bf245f7d97b5bb80
 	fi
 } || {
 	rm /root/backup.vps 1>/dev/null 2>/dev/null
