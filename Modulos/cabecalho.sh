@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 while true $x != "ok"
 do
 stsl=$(ps x | grep "limiter"|grep -v grep > /dev/null && echo -e "\033[1;32m◉ " || echo -e "\033[1;31m○ ")

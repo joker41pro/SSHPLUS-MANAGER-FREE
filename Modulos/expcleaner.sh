@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 datenow=$(date +%s)
 remove_ovp () {
 if [[ -e /etc/debian_version ]]; then

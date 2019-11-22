@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 clear
 [[ -e /home/versao ]] && rm /home/versao
 wget -P /home https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/versao > /dev/null 2>&1

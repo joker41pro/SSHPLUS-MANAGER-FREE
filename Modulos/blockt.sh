@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 clear
 IP=$(wget -qO- ipv4.icanhazip.com)
 arq="/etc/Plus-torrent"

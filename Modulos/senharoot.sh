@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 
 echo -e "\033[1;31mATENCAO!!\033[0m"
 echo " "
@@ -8,9 +9,8 @@ echo -e "\033[1;32mDIGITE A NOVA SENHA \033[1;32m
 para continuar...\033[1;31m\033[0m"
 read  -p : pass
 (echo $pass; echo $pass)|passwd 2>/dev/null
-sleep 1s
 echo -e "\033[1;31mSENHA ALTERADA COM SUCESSO!\033[0m"
-sleep 5s
+sleep 2s
 cd
 clear
 

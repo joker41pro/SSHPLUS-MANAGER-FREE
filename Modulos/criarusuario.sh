@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 IP=$(cat /etc/IP)
 # Gerar client.ovpn
 newclient () {

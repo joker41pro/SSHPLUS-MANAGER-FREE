@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 if [ -d "/etc/squid/" ]; then
     payload="/etc/squid/payload.txt"
 elif [ -d "/etc/squid3/" ]; then

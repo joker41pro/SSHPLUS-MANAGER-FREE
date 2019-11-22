@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 clear
 fun_bar () {
 comando[0]="$1"

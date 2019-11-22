@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 fun_bar () {
 comando[0]="$1"
 comando[1]="$2"
@@ -25,7 +26,6 @@ done
 echo -e "\033[1;33m]\033[1;37m -\033[1;32m OK !\033[1;37m"
 tput cnorm
 }
-export LC_ALL=C
 IP=$(cat /etc/IP)
 x="ok"
 menu ()

@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%20s%s\n' "   Alterar limite de conexões simultâneas   " ; tput sgr0
 database="/root/usuarios.db"
 if [ ! -f "$database" ]; then

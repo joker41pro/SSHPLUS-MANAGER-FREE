@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 clear
 backbot=$1
 [[ -z $backbot ]] && {

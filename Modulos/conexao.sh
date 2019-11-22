@@ -1,4 +1,5 @@
 #!/bin/bash
+LC_ALL=C
 if [[ -e /usr/lib/licence ]]; then
 ram1=$(free -h | grep -i mem | awk {'print $2'})
 ram2=$(free -h | grep -i mem | awk {'print $4'})
