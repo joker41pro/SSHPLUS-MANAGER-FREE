@@ -47,21 +47,7 @@ echo -e "\033[1;31m≠×≠×≠×≠×≠×≠×≠×≠×[\033[1;33m • \033[
 echo ""
 echo -ne "\033[1;36mContinuar a instalação? [S/n]: \033[1;37m"; read x
 [[ $x = @(n|N) ]] && rm -f $RUNDIR/list /bin/versao /usr/lib/licence /home/sshplus /home/versao && exit
-echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
 chmod +x list > /dev/null 2>&1
-IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-if [[ "$IP" = "" ]]; then
-  IP=$(wget -qO- ipv4.icanhazip.com)
-fi
-echo ""
-echo -ne "\033[1;36mPara continuar confirme seu IP: \033[1;37m"; read -e -i $IP ipdovps
-if [ -z "$ipdovps" ]; then
-  echo ""
-  echo -e "\033[1;31mErro \033[1;32mIP incorreto!\033[0m"
-  rm -rf $HOME/Plus $_lsk/list > /dev/null 2>&1
-  sleep 2
-  clear; exit 1
-fi
 if [ -f "$HOME/usuarios.db" ]
 then
     clear
@@ -70,7 +56,7 @@ then
     echo ""
 	echo -e "                 \033[1;33m• \033[1;31mATENCAO \033[1;33m• \033[0m"
 	echo ""
-    echo -e "\033[1;33mUma base de Dados de Usuários \033[1;32m(usuarios.db) \033[1;33mFoi" 
+    echo -e "\033[1;33mUma base de Dados de Usuários \033[1;32m(usuarios.db) \033[1;33mFoi"
     echo -e "Encontrada! Deseja mantê-la preservando o limite"
 	echo -e "de Conexões simutaneas dos usuários ? Ou Deseja"
     echo -e "criar uma nova base de dados ?\033[0m"
