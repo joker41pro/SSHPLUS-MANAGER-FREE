@@ -20,7 +20,7 @@
 ## Instalação
 
 ```bash
-wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/sshplus.sh && bash sshplus.sh
+wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Plus && bash Plus
 ```
 
 ================================================================================
@@ -67,4 +67,4 @@ wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/maste
 ☆ https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ ☆
 ```
 
-**By: [ FULL SCRIPTS ⃘⃤꙰✰ ] VPS**
+**By: [ FULL SCRIPTS ⃘⃤꙰✰ ]**

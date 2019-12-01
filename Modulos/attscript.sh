@@ -64,9 +64,9 @@ vrs2=$(sed -n '1 p' /tmp/att | sed -e 's/[^0-9]//ig')
   echo -ne "  \033[1;32mDESEJA ATUALIZAR \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read res
   if [[ "$res" = s || "$res" = S ]];then
     echo -e "\n\033[1;32m  INICIANDO ATUALIZACAO..."
-    wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/sshplus.sh > /dev/null 2>&1
-    chmod +x sshplus.sh
-    ./sshplus.sh
+    wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Plus > /dev/null 2>&1
+    chmod +x Plus
+    ./Plus
     clear
     echo -e "\033[1;32mSCRIPT ATUALIZADO COM SUCESSO\033[0m\n"
     rm /tmp/att > /dev/null 2>&1
