@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 tput setaf 7 ; tput setab 4 ; tput bold ; printf '%33s%s%-12s\n' "Mudar data de expiração" ; tput sgr0
 echo ""
 echo -e "\033[1;33m LISTA DE USUARIOS E DATA DE EXPIRACAO:\033[0m "

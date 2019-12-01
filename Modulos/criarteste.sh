@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 IP=$(cat /etc/IP)
 if [ ! -d /etc/SSHPlus/userteste ]; then
 mkdir /etc/SSHPlus/userteste

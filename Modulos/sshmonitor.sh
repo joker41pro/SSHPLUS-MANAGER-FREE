@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 clear
 if [[ -e /usr/lib/licence ]]; then
 database="/root/usuarios.db"

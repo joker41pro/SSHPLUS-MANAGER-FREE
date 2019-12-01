@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 
 echo -e "\033[1;31mATENCAO!!\033[0m"
 echo " "

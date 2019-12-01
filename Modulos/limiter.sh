@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 clear
 database="/root/usuarios.db"
 fun_drop () {

@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 clear
 echo -e "                              \033[1;31mBy Crazy\033[1;36m"
 echo "   SSHPlus" | figlet

@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 fun_exp () {
 (
 for _user in $(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody); do

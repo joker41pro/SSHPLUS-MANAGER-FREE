@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 clear
 backbot=$1
 [[ -z $backbot ]] && {

@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 [[ ! -d /etc/SSHPlus ]] && exit 0
 [[ ! -d /etc/bot ]] && exit 0
 source ShellBot.sh

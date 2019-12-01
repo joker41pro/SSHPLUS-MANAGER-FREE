@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 database="/root/usuarios.db"
 echo $$ > /tmp/pids
 fun_drop () {

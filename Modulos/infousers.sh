@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 clear
 echo -e "\E[44;1;37m Usuario         Senha       limite      validade \E[0m"
 echo ""

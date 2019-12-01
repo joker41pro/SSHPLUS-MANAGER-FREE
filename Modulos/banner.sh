@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 clear
 chk=$(cat /etc/ssh/sshd_config | grep Banner)
 [[ $(netstat -nltp|grep 'dropbear' | wc -l) != '0' ]] && {

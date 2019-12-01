@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 fun_bar () {
 comando[0]="$1"
 comando[1]="$2"

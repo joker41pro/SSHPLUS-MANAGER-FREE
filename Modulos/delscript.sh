@@ -1,5 +1,5 @@
 #!/bin/bash
-LC_ALL=C
+export LC_ALL=C
 clear
 echo -e "\033[1;32mDESEJA DESISTALAR O SSHPLUS MANAGER\033[1;33m"
 read -p "Deseja Remover? [s/n] " resp
