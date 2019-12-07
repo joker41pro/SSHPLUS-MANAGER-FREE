@@ -12,7 +12,7 @@
 - Otimizações gerais e correções de bugs.
 - Otimizado para versões recentes do Ubuntu e Debian.
 
-## :heavy_exclamation_mark: Requisitos
+## Requisitos
 
 - Recomendado usar Debian ou Ubuntu.
 - Usar distro nova ou formatada. (para evitar futuros problemas)
@@ -27,7 +27,9 @@ wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/maste
 
 # TCP-Tweaker-1.0 (TCP-SPEED)
 
-## Instalação
+![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/blob/master/Imagenes/TCP_Tweaker_TCP_SPEED.jpg)
+
+## Instação
 
 ```bash
 wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/master/Install/tcptweaker.sh && bash tcptweaker.sh
@@ -35,6 +37,8 @@ wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/maste
 
 ============================
 # Painel SSHPLUS Web
+
+![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/blob/master/Imagenes/Panel_SSHPLUS_Web.jpg)
 
 ## Instalação
 
@@ -44,6 +48,8 @@ wget https://raw.githubusercontent.com/alissonlauffer/SSHPLUS-MANAGER-FREE/maste
 
 ============================
 # Capturador de IP
+
+![logo](https://github.com/AAAAAEXQOSyIpN2JZ0ehUQ/SSHPLUS-MANAGER-FREE/blob/master/Imagenes/Capturador_IP.jpg)
 
 ## Instalação
 
